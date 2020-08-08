@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/zhenokin/NodeJS-Global-Mentoring-Program-2020Q3/issues"
   },
-  "homepage": "https://github.com/zhenokin/NodeJS-Global-Mentoring-Program-2020Q3#readme"
+  "homepage": "https://github.com/zhenokin/NodeJS-Global-Mentoring-Program-2020Q3#readme",
+
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
