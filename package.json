@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "task1": "node task1.js"
+    "task1": "nodemon task1.js",
+    "task2": "nodemon task2.js"
   },
   "repository": {
     "type": "git",
@@ -19,5 +20,9 @@
 
   "devDependencies": {
     "nodemon": "^2.0.4"
+  },
+
+  "dependencies": {
+    "csvtojson": "^2.0.10"
   }
 }
