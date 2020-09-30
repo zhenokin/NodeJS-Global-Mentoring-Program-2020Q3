@@ -1,13 +1,11 @@
+import { DB_CONFIG } from '../config';
+
 const Sequelize = require('sequelize');
 
 
 function connectToDB() {
     return new Promise((res, rej) => {
-        const sequelize = new Sequelize('users', 'postgres', '', {
-            host: 'localhost',
-            dialect: 'postgres',
-            port: 5432
-        });
+        const sequelize = new Sequelize(DB_CONFIG.url);
 
         sequelize
             .authenticate()

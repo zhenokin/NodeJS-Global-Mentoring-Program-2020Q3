@@ -29,7 +29,7 @@ class Mapper {
                 });
         });
     }
-
+    // USER DB PART
     addUser(id, login, password, age) {
         const user = {
             login,
@@ -62,6 +62,28 @@ class Mapper {
         };
         subStr && (options[Op.substring] = subStr);
         return this.users.findAll(options);
+    }
+
+    // GROUP DB PART
+
+    getAllGroups() {
+
+    }
+
+    getGroupById(id) {
+
+    }
+
+    addGroup(group) {
+
+    }
+
+    updateGroup(id, options) {
+
+    }
+
+    deleteGroup(id) {
+        
     }
 
     setDB(db) {

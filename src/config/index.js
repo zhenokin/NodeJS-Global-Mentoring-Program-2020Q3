@@ -1,10 +1,5 @@
 const DB_CONFIG = {
-    dbName: 'users',
-    userName: 'postgres',
-    password: '',
-    host: 'localhost',
-    dialect: 'postgres',
-    port: 5432
+    url: 'postgres://sineeizx:czgEIMDjf9T1XQzQE3x7C-hPGIUlJEXM@balarama.db.elephantsql.com:5432/sineeizx'
 };
 
 const TEST_USERS = [
