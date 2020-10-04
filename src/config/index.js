@@ -8,7 +8,13 @@ const TEST_USERS = [
     { login: 'Third',  password: 'third1', age: 13 }
 ];
 
+const TEST_GROUPS = [
+    { name: 'school' },
+    { name: 'work' }
+];
+
 export {
     DB_CONFIG,
-    TEST_USERS
+    TEST_USERS,
+    TEST_GROUPS
 };

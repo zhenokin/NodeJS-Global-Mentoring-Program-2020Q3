@@ -1,7 +1,7 @@
 import express from 'express';
 import Joi from '@hapi/joi';
 import { validateSchema } from '../helpers';
-import Mapper from '../data-access';
+import { UserService } from '../services';
 
 const router = express.Router();
 const userSchemaPost = Joi.object().keys({
@@ -27,8 +27,7 @@ const userSchemaList = Joi.object().keys({
 router.post('/', validateSchema(userSchemaPost), async (req, res, next) => {
     try {
         const { id, login, password, age } = req.query;
-        console.log('hello');
-        const result = await Mapper.addUser(id, login, password, age);
+        const result = await UserService.addUser(id, login, password, age);
         res.send(result);
     } catch (error) {
         next(error);
@@ -39,7 +38,7 @@ router.post('/', validateSchema(userSchemaPost), async (req, res, next) => {
 router.get('/list', validateSchema(userSchemaList), async (req, res, next) => {
     try {
         const  { subStr, limit } = req.query;
-        const users = await Mapper.getUsers(subStr, limit);
+        const users = await UserService.getUsers(subStr, limit);
         res.send(users);
     } catch (error) {
         next(error);
@@ -47,11 +46,22 @@ router.get('/list', validateSchema(userSchemaList), async (req, res, next) => {
     }
 });
 
+router.post('/add-group', async (req, res, next) => {
+    try {
+        const  { userId, groupId } = req.query;
+        await UserService.addGroupToUser(userId, groupId);
+        res.send('success');
+    } catch (error) {
+        next(error);
+        return;
+    }
+})
+
 router.route('/:id')
     .get(validateSchema(userSchemaGetUser), async (req, res, next) => {
         try {
             const { id } = req.params;
-            const result = await Mapper.getUserById(id);
+            const result = await UserService.getUserById(id);
             res.send(result);
         } catch (error) {
             next(error);
@@ -62,7 +72,7 @@ router.route('/:id')
         try {
             const { id } = req.params;
             const { login, password, age } = req.query;
-            await Mapper.updateUser(id, login, password, age);
+            await UserService.updateUser(id, login, password, age);
             res.send('success');
         } catch (error) {
             next(error);
@@ -72,7 +82,7 @@ router.route('/:id')
     .delete(async (req, res, next) => {
         try {
             const { id } = req.params;
-            await Mapper.deleteUser(id);
+            await UserService.deleteUser(id);
             res.send('success');
         } catch (error) {
             next(error);

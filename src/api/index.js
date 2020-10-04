@@ -5,6 +5,6 @@ import groupRouter from './groupRouter';
 export default () => {
     const app = Router();
     app.use('/users', userRouter);
-    app.use('/group', groupRouter);
+    app.use('/groups', groupRouter);
     return app;
 };
