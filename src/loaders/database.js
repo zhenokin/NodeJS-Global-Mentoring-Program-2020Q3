@@ -1,0 +1,23 @@
+import { DB_CONFIG } from '../config';
+
+const Sequelize = require('sequelize');
+
+
+function connectToDB() {
+    return new Promise((res, rej) => {
+        const sequelize = new Sequelize(DB_CONFIG.url);
+
+        sequelize
+            .authenticate()
+            .then(() => {
+                console.log('Connection has been established successfully.');
+                res(sequelize);
+            })
+            .catch(err => {
+                console.error('Unable to connect to the database:', err);
+                rej('Connect to DB is failed');
+            });
+    });
+}
+
+export default connectToDB;
