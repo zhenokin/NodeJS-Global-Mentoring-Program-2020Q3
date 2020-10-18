@@ -1,12 +1,13 @@
 import { Op } from 'sequelize';
 import Mapper from '../data-access';
+import { logger } from '../logger';
 import GroupService from './group.service';
 
-class UserService {
-    constructor() {
-    }
+const moduleName = '[UserService]';
 
+class UserService {
     createUser(id, login, password, age) {
+        logger.info(moduleName, 'createUser(),', 'args:', { id, login, password, age });
         const user = {
             login,
             password,
@@ -18,6 +19,7 @@ class UserService {
     }
 
     updateUser(id, login, password, age) {
+        logger.info(moduleName, 'updateUser(),', 'args:',  { id, login, password, age });
         const newOptions = {};
         login && (newOptions.login = login);
         password && (newOptions.password = password);
@@ -26,10 +28,12 @@ class UserService {
     }
 
     deleteUser(id) {
+        logger.info(moduleName, 'deleteUser(),', 'args:',  { id });
         return Mapper.deleteUser(id);
     }
 
     getUsers(subStr, limit = 10) {
+        logger.info(moduleName, 'getUsers(),', 'args:', { subStr, limit });
         const options = {
             limit
         };
@@ -38,15 +42,18 @@ class UserService {
     }
 
     getUserById(id) {
+        logger.info(moduleName, 'getUserById(),', 'args:', { id });
         return Mapper.getUserById(id);
     }
 
     addGroupToUser(userId, groupId) {
+        logger.info(moduleName, 'getUserById(),', 'args:', { userId, groupId });
         return Mapper.db.transaction(() => {
             return this.getUserById(userId)
                 .then(user => {
                     return GroupService.getGroupById(groupId)
                         .then(group => {
+                            logger.info(moduleName, 'getUserById(),', 'add user:', user, 'to group:', group);
                             return user.addGroup(group);
                         });
                 });
