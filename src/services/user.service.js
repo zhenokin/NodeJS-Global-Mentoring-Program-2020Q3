@@ -71,6 +71,17 @@ class UserService {
                 });
         });
     }
+
+    getUserForAuth(login, password) {
+        logger.info(moduleName, 'getUserForAuth(),', 'args:', { login, password });
+        const options = {
+            where: {
+                login,
+                password
+            }
+        };
+        return Mapper.getUserByOptions(options);
+    }
 }
 
 const instance = new UserService();

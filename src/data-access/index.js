@@ -80,6 +80,10 @@ class Mapper {
         });
     }
 
+    getUserByOptions(options) {
+        return this.users.findOne(options);
+    }
+
     deleteUser(id) {
         return this.users.destroy({ where: { id } });
     }
